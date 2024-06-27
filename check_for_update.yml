@@ -1,0 +1,16 @@
+---
+- name: Check for updates on Ubuntu
+  hosts: ansible-host01
+  tasks:
+  - name: Update the package cache
+    apt:
+      update_cache: yes
+
+  - name: List upgradable packages
+    command: apt list --upgradable
+    register: upgradeable_packages
+
+  - name: Display upgradable packages
+    debug:
+      msg: "{{ upgradeable_packages.stdout_lines }}"
+...
